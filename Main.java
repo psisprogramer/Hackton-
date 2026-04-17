@@ -1,46 +1,44 @@
-// Esta interfaz básicamente define lo que cualquier unidad debe poder hacer
-// o sea, iniciar y finalizar una operación sí o sí
+// interfaz que básicamente dice qué cosas debe poder hacer cualquier unidad
+// en este caso iniciar y finalizar operación
 interface Operable {
     void iniciarOperacion();
     void finalizarOperacion();
 }
 
-// Esta es una clase abstracta porque no tiene sentido crear una unidad genérica
-// sirve más como base para las demás
+// clase abstracta que sirve como base para todas las unidades
+// no se puede crear directamente, solo sirve para heredar
 abstract class UnidadEntrega {
 
-    // atributos básicos que todas las unidades tienen
+    // aquí guardo el identificador, es protected para que las hijas lo puedan usar
     protected String identificador;
 
-    // constructor para inicializar el ID
+    // constructor para asignar el id cuando creo el objeto
     public UnidadEntrega(String identificador) {
         this.identificador = identificador;
     }
 
-    // método que ya está hecho y lo pueden usar todas
+    // este método ya está hecho y lo heredan todas las clases
     public void mostrarInformacion() {
         System.out.println("ID: " + identificador);
     }
 
-    // este método lo dejo abstracto porque cada vehículo entrega diferente
+    // este método no lo defino aquí porque cada unidad entrega diferente
     public abstract void realizarEntrega();
 }
 
-// Bicicleta
-// aquí ya hago una clase concreta que hereda y también implementa la interfaz
+// bicicleta hereda de la clase base y también cumple lo de la interfaz
 class Bicicleta extends UnidadEntrega implements Operable {
 
-    // constructor que llama al de la clase padre
     public Bicicleta(String identificador) {
-        super(identificador);
+        super(identificador); // uso el constructor de la clase padre
     }
 
-    // cada clase define su forma de entregar
+    // mismo método que las otras clases pero con su propia forma de entregar
     public void realizarEntrega() {
         System.out.println("Entrega en bicicleta");
     }
 
-    // implementación de la interfaz
+    // estos métodos vienen de la interfaz
     public void iniciarOperacion() {
         System.out.println("Inicia bicicleta");
     }
@@ -50,13 +48,14 @@ class Bicicleta extends UnidadEntrega implements Operable {
     }
 }
 
-//  Motocicleta
+// motocicleta funciona igual pero con su propio comportamiento
 class Motocicleta extends UnidadEntrega implements Operable {
 
     public Motocicleta(String identificador) {
         super(identificador);
     }
 
+    // mismo método pero cambia lo que hace
     public void realizarEntrega() {
         System.out.println("Entrega en motocicleta");
     }
@@ -70,13 +69,14 @@ class Motocicleta extends UnidadEntrega implements Operable {
     }
 }
 
-// Drone
+// drone igual, misma estructura pero comportamiento diferente
 class Drone extends UnidadEntrega implements Operable {
 
     public Drone(String identificador) {
         super(identificador);
     }
 
+    // aquí se ve el polimorfismo porque todos tienen este método pero hacen cosas distintas
     public void realizarEntrega() {
         System.out.println("Entrega con drone");
     }
@@ -94,12 +94,14 @@ class Drone extends UnidadEntrega implements Operable {
 public class Main {
     public static void main(String[] args) {
 
-        // creo objetos de cada tipo
+        // creo los objetos
         Bicicleta bici = new Bicicleta("B1");
         Motocicleta moto = new Motocicleta("M1");
         Drone drone = new Drone("D1");
 
-        // aqui básicamente simulo el proceso completo
+        // hago el mismo flujo con todos
+        // aquí se nota que tienen la misma estructura pero cada uno responde diferente
+
         bici.iniciarOperacion();
         bici.mostrarInformacion();
         bici.realizarEntrega();
