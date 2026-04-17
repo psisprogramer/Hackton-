@@ -5,7 +5,7 @@ interface Operable {
     void finalizarOperacion();
 }
 
-// Esta es una clase abstracta porque no tiene sentido crear una "unidad genérica"
+// Esta es una clase abstracta porque no tiene sentido crear una unidad genérica
 // sirve más como base para las demás
 abstract class UnidadEntrega {
 
@@ -99,7 +99,7 @@ public class Main {
         Motocicleta moto = new Motocicleta("M1");
         Drone drone = new Drone("D1");
 
-        // aquí básicamente simulo el proceso completo
+        // aqui básicamente simulo el proceso completo
         bici.iniciarOperacion();
         bici.mostrarInformacion();
         bici.realizarEntrega();
